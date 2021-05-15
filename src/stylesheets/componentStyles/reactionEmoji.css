@@ -1,0 +1,15 @@
+.emoji-list {
+  width: 350px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 15px;
+  background-color: gainsboro;
+  padding: 2px 0;
+}
+
+.emoji-list button {
+  border: none;
+  background: none;
+}
