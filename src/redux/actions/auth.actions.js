@@ -1,12 +1,15 @@
 import * as types from "../constants/auth.constants";
 import api from "../../apiService";
 import { alertActions } from "./alert.actions";
+import { routeActions } from "./route.actions";
 
 const register = (name, email, password) => async (dispatch) => {
   dispatch({ type: types.REGISTER_REQUEST, payload: null });
   try {
     const res = await api.post("/users", { name, email, password });
     dispatch({ type: types.REGISTER_SUCCESS, payload: res.data.data });
+
+    dispatch(routeActions.redirect("/login"));
   } catch (error) {
     dispatch({ type: types.REGISTER_FAILURE, payload: error });
   }
@@ -52,7 +55,6 @@ const updateUserProfile = (name, avatarUrl) => async (dispatch) => {
   try {
     const res = await api.put("/users", { name, avatarUrl });
     dispatch({ type: types.UPDATE_PROFILE_SUCCESS, payload: res.data.data });
-    console.log("Your profile has been updated successfully");
   } catch (error) {
     dispatch({ type: types.UPDATE_PROFILE_FAILURE, payload: error });
   }

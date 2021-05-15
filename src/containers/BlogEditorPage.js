@@ -79,7 +79,6 @@ const BlogEditorPage = () => {
               (res) => res.uploadInfo.secure_url
             ),
           });
-          console.log("Results in images: ", result.data);
         }
         if (error) {
           console.log("Errors in images: ", error);

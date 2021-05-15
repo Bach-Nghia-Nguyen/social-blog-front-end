@@ -37,7 +37,6 @@ const getSingleBlog = (blog_id) => async (dispatch) => {
       type: types.GET_SINGLE_BLOG_SUCCESS,
       payload: res.data.data,
     });
-    console.log("single blog payload is: ", res.data.data);
   } catch (error) {
     dispatch({ type: types.GET_SINGLE_BLOG_FAILURE, payload: error });
   }

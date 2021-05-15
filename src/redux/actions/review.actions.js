@@ -7,7 +7,7 @@ const createReview = (blogId, reviewText) => async (dispatch) => {
     const res = await api.post(`/reviews/blogs/${blogId}`, {
       content: reviewText,
     });
-    console.log("new review has been created: ", res.data.data);
+
     dispatch({
       type: reviewTypes.CREATE_REVIEW_SUCCESS,
       payload: res.data.data,

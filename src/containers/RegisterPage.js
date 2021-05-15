@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
-import { authActions } from "../redux/actions";
+import { Link, Redirect, useHistory } from "react-router-dom";
+import { authActions, routeActions } from "../redux/actions";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const loading = useSelector((state) => state.auth.loading);
+  const redirectTo = useSelector((state) => state.route.redirectTo);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -40,14 +42,14 @@ const RegisterPage = () => {
 
   if (isAuthenticated) return <Redirect to="/" />;
 
-  const fillFakeData = () => {
-    setFormData({
-      name: "Minh",
-      email: "minhdh@cs.vn",
-      password: "123",
-      password2: "123",
-    });
-  };
+  useEffect(() => {
+    if (redirectTo) {
+      if (redirectTo === "/login") {
+        history.push(redirectTo);
+        dispatch(routeActions.removeRedirectTo());
+      }
+    }
+  }, [dispatch, redirectTo, history]);
 
   return (
     <div className="register-page">
@@ -126,16 +128,6 @@ const RegisterPage = () => {
                 Register
               </Button>
             )}
-
-            {/* TODO: remove fake data */}
-            <Button
-              className="btn-block"
-              type="button"
-              variant="light"
-              onClick={fillFakeData}
-            >
-              Fill in fake data
-            </Button>
 
             <p>
               Already have an account? <Link to="/login">Sign In</Link>
