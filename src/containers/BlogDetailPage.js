@@ -49,7 +49,10 @@ const BlogDetailPage = () => {
           <FontAwesomeIcon icon="chevron-left" size="1x" /> Back
         </Button>
 
-        {blog && blog._id && currentUser._id === blog.author._id ? (
+        {blog &&
+        currentUser &&
+        blog._id &&
+        currentUser._id === blog.author._id ? (
           <Link to={`/blog/edit/${blog._id}`}>
             <Button variant="primary">
               <FontAwesomeIcon icon="edit" size="1x" /> Edit
