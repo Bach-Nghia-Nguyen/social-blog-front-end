@@ -1,10 +1,9 @@
-import { useSelector } from "react-redux";
 import * as types from "../constants/review.constants";
 
 const initialState = {
   reviews: [],
   submitLoading: false,
-  selectedBlog: null, // useSelector((state) => state.blog.selectedBlog),
+  selectedBlog: null,
 };
 
 const reviewReducers = (state = initialState, action) => {
